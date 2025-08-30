@@ -6,17 +6,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      minlength: 3,
-      maxlength: 20,
       trim: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      lowercase: true,
       trim: true,
-      match: /^\S+@\S+\.\S+$/,
     },
     password: {
       type: String,
@@ -28,20 +24,24 @@ const userSchema = new mongoose.Schema(
     },
     savedRecipes: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Recipe",
       },
     ],
     testedRecipes: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Recipe",
       },
     ],
+    ingredients: [
+      {
+        name: { type: String, required: true, trim: true },
+        unit: { type: String, required: true, trim: true },
+      },
+    ],
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 module.exports = { userSchema };
