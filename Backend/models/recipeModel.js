@@ -12,7 +12,6 @@ const recipeSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-
     description: {
       type: String,
       required: true,
@@ -20,21 +19,9 @@ const recipeSchema = new mongoose.Schema(
     },
     ingredients: [
       {
-        name: {
-          type: String,
-          required: true,
-          trim: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-          min: 0,
-        },
-        unit: {
-          type: String,
-          required: true,
-          trim: true,
-        },
+        name: { type: String, required: true },
+        quantity: { type: Number, required: true },
+        unit: { type: String, required: true },
       },
     ],
     instructions: {
@@ -43,20 +30,23 @@ const recipeSchema = new mongoose.Schema(
     },
     images: [
       {
-        type: String,
-        required: true,
+        url: {
+          type: String,
+          required: true,
+        },
+        filename: {
+          type: String,
+          required: true,
+        },
       },
     ],
-    videoUrl: {
-      type: String,
-      required: true,
-    },
+    videoUrl: { type: String },
     filters: [String],
     tags: [String],
   },
   { timestamps: true }
 );
 
-const recipeModel = new mongoose.model("Recipe", recipeSchema);
+const recipeModel = mongoose.model("Recipe", recipeSchema);
 
 module.exports = { recipeModel };

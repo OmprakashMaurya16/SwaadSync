@@ -2,8 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const { userModel } = require("./models/userModel");
-const { recipeModel } = require("./models/recipeModel");
+const recipeRouter = require("./routes/recipeRoute");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -19,6 +18,8 @@ async function main() {
 main()
   .then(() => console.log("Mongodb connected successfully"))
   .catch((err) => console.log(`Mongodb connection error : ${err}`));
+
+app.use("/api/recipes", recipeRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is started at http://localhost:${PORT}`);
