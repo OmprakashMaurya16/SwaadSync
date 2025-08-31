@@ -1,6 +1,11 @@
 const multer = require("multer");
 const { storage } = require("../config/cloudConfig");
-const { addRecipe } = require("../controller/recipeController");
+const {
+  addRecipe,
+  listRecipe,
+  removeRecipe,
+} = require("../controller/recipeController");
+const { deleteRecipeAssets } = require("../middleware/deleteRecipeAssets");
 const recipeRouter = require("express").Router();
 
 const upload = multer({ storage });
@@ -14,4 +19,8 @@ recipeRouter.post(
   addRecipe
 );
 
-module.exports = recipeRouter;
+recipeRouter.get("/list", listRecipe);
+
+recipeRouter.post("/remove", deleteRecipeAssets, removeRecipe);
+
+module.exports = { recipeRouter };
