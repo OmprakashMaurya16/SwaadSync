@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const { recipeRouter } = require("./routes/recipeRoute");
 const { userRouter } = require("./routes/userRoute");
+const { cookBookRouter } = require("./routes/cookBookRoute");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -22,6 +23,7 @@ main()
 
 app.use("/api/recipes", recipeRouter);
 app.use("/api/users", userRouter);
+app.use("/api/cookbook", cookBookRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is started at http://localhost:${PORT}`);
