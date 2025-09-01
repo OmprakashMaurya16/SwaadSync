@@ -9,6 +9,12 @@
 	width: 32px;
 	height: 32px;
 	display: block;
+	filter: none;
+	transition: filter 0.2s, box-shadow 0.2s;
+}
+
+body.ss-dark .ss-chef-hat-img {
+	filter: brightness(0) saturate(100%) invert(81%) sepia(77%) saturate(749%) hue-rotate(346deg) brightness(101%) contrast(101%);
 }
 
 .ss-streak-count {
@@ -50,8 +56,10 @@
 
 .ss-homepage-root {
 	margin-left: 80px;
-	background: #fafafa;
+	background: var(--ss-bg);
 	min-height: 100vh;
+	color: var(--ss-text);
+	transition: background 0.3s, color 0.3s;
 }
 
 .ss-homepage-header {
@@ -59,7 +67,7 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 24px 40px 8px 40px;
-	background: #fff;
+	background: var(--ss-header-bg);
 	position: sticky;
 	top: 0;
 	z-index: 10;
@@ -69,13 +77,14 @@
 .ss-homepage-searchbar {
 	display: flex;
 	align-items: center;
-	background: #f1f1f1;
+	background: var(--ss-search-bg);
 	border-radius: 24px;
 	padding: 0 16px;
 	height: 48px;
-	min-width: 400px;
-	flex: 1;
-	max-width: 700px;
+	flex: 1 1 auto;
+	margin-right: 32px;
+	min-width: 0;
+	max-width: none;
 }
 
 .ss-search-icon {
@@ -91,6 +100,7 @@
 	font-size: 1.1rem;
 	width: 100%;
 	padding: 12px 0;
+	color: var(--ss-text);
 }
 
 .ss-homepage-header-right {
@@ -139,7 +149,7 @@
 	align-items: center;
 	gap: 24px;
 	padding: 16px 40px 24px 40px;
-	background: #fff;
+	background: var(--ss-header-bg);
 	border-bottom: 1px solid #eee;
 	overflow-x: auto;
 	white-space: nowrap;
@@ -147,7 +157,7 @@
 
 .ss-category {
 	font-size: 1.05rem;
-	color: #444;
+	color: var(--ss-text);
 	cursor: pointer;
 	padding: 4px 10px;
 	border-radius: 16px;
@@ -156,8 +166,8 @@
 
 .ss-category-active,
 .ss-category:hover {
-	background: #f1f1f1;
-	color: #d32f2f;
+	background: #FFAF45;
+	color: #111;
 }
 
 .ss-homepage-masonry {
@@ -167,7 +177,7 @@
 }
 
 .ss-dish-card {
-	background: #fff;
+	background: var(--ss-card-bg);
 	border-radius: 18px;
 	margin-bottom: 18px;
 	box-shadow: 0 2px 8px rgba(0,0,0,0.07);
@@ -180,7 +190,7 @@
 }
 
 .ss-dish-card:hover {
-	box-shadow: 0 4px 16px rgba(211,47,47,0.13);
+	box-shadow: 0 4px 16px rgba(255,175,69,0.18);
 }
 
 .ss-dish-img {
@@ -194,6 +204,22 @@
 	padding: 12px 16px 14px 16px;
 	font-size: 1.08rem;
 	font-weight: 500;
-	color: #222;
+	color: var(--ss-text);
 	text-align: left;
+}
+/* Theme variables */
+:root {
+	--ss-bg: #fff;
+	--ss-header-bg: #fff;
+	--ss-search-bg: #f1f1f1;
+	--ss-card-bg: #fff;
+	--ss-text: #222;
+}
+
+body.ss-dark {
+	--ss-bg: #111;
+	--ss-header-bg: #111;
+	--ss-search-bg: #222;
+	--ss-card-bg: #181818;
+	--ss-text: #FFAF45;
 }
