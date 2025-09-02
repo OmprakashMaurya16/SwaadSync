@@ -1,6 +1,7 @@
 
 import React from "react";
 import "./Homepage.css";
+import AccountDropdown from "../../components/AccountDropdown/AccountDropdown";
 
 const sampleDishes = [
   {
@@ -65,7 +66,7 @@ const sampleDishes = [
   },
 ];
 
-const Homepage = () => {
+const Homepage = ({ user, onLogout }) => {
   return (
     <div className="ss-homepage-root">
       <header className="ss-homepage-header">
@@ -81,17 +82,11 @@ const Homepage = () => {
           <div className="ss-streak">
             <span className="ss-chef-hat">
               <img src="/assets/chef-hat.png" alt="Streaks" className="ss-chef-hat-img" />
-              <span className="ss-streak-count">0</span>
               <span className="ss-streak-tooltip">Streaks</span>
             </span>
+            <span className="ss-streak-count ss-streak-count-right">0</span>
           </div>
-          <div className="ss-profile">
-            <img
-              src="https://randomuser.me/api/portraits/men/32.jpg"
-              alt="Profile"
-              className="ss-profile-img"
-            />
-          </div>
+          <AccountDropdown user={user} onLogout={onLogout} />
         </div>
       </header>
       <nav className="ss-homepage-categories">

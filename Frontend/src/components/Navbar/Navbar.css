@@ -108,7 +108,7 @@ body.ss-dark .ss-theme-label {
 }
 
 .ss-navbar-item:hover {
-	color: #d32f2f;
+	color: #FFAF45;
 }
 
 .ss-navbar-icon {
@@ -164,7 +164,7 @@ body.ss-dark .ss-theme-label {
 }
 
 .ss-theme-toggle:hover {
-	background: #e89c2c;
+	background: #FFAF45;
 	color: #fff;
 }
 
@@ -211,5 +211,5 @@ body.ss-dark .ss-theme-label {
 }
 
 .ss-navbar-bottom:hover {
-	color: #d32f2f;
+	color: #FFAF45;
 }

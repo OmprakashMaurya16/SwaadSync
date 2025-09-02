@@ -9,7 +9,7 @@
 	width: 32px;
 	height: 32px;
 	display: block;
-	filter: none;
+	filter: brightness(0) saturate(100%) invert(81%) sepia(77%) saturate(749%) hue-rotate(346deg) brightness(101%) contrast(101%);
 	transition: filter 0.2s, box-shadow 0.2s;
 }
 
@@ -18,15 +18,23 @@ body.ss-dark .ss-chef-hat-img {
 }
 
 .ss-streak-count {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -40%);
 	font-size: 1rem;
 	font-weight: bold;
-	color: #d32f2f;
+	color: #FFAF45;
 	pointer-events: none;
 	user-select: none;
+	margin-left: 8px;
+	position: static;
+	vertical-align: middle;
+}
+
+.ss-streak-count-right {
+	display: inline-block;
+	margin-left: 8px;
+	position: static;
+	top: auto;
+	left: auto;
+	transform: none;
 }
 
 .ss-streak-tooltip {

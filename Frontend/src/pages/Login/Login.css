@@ -1,0 +1,88 @@
+.ss-login-root {
+  min-height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.32), rgba(0,0,0,0.32)), url('/assets/ss_bg_login_signup.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  transition: background 0.3s;
+}
+
+.ss-login-form {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 48px 56px 48px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 320px;
+  align-items: flex-start;
+  margin-right: 7vw;
+}
+
+.ss-login-title {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.ss-login-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  font-size: 1rem;
+  background: var(--ss-search-bg);
+  color: #fff;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.ss-login-input:focus {
+  border: 1.5px solid #FFAF45;
+}
+
+.ss-login-btn {
+  width: 100%;
+  padding: 12px 0;
+  background: #FFAF45;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.ss-login-btn:hover {
+  background: #FFAF45;
+  color: #fff;
+}
+
+.ss-login-error {
+  color: #d32f2f;
+  font-size: 0.98rem;
+  margin-bottom: 4px;
+}
+
+.ss-login-switch {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+.ss-login-link {
+  color: #FFAF45;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  margin-left: 4px;
+}
+  
+.ss-login-link:focus {
+  outline: 2px solid #FFAF45;
+}
