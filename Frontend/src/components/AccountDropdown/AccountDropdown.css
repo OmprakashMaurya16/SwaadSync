@@ -1,0 +1,47 @@
+.ss-account-dropdown-root {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ss-account-dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 110%;
+  min-width: 160px;
+  background: var(--ss-card-bg);
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  padding: 16px 0 8px 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.ss-account-username {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--ss-text);
+  padding: 8px 24px 8px 24px;
+  text-align: left;
+}
+
+.ss-account-logout {
+  background: #FFAF45;
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 8px 16px 0 16px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.ss-account-logout:hover {
+  background: #FFAF45;
+  color: #fff;
+}

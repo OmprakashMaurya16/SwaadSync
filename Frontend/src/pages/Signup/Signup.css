@@ -1,0 +1,115 @@
+.ss-signup-root {
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url("/assets/HeroImage.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 5vw;
+  transition: background 0.3s ease-in-out;
+}
+
+.ss-signup-form {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 48px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 340px;
+  max-width: 400px;
+  align-items: stretch;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ss-signup-title {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.ss-signup-input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  outline: none;
+  transition: all 0.25s ease-in-out;
+}
+
+.ss-signup-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ss-signup-input:focus {
+  border: 1.5px solid #ffaf45;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.ss-signup-btn {
+  width: 100%;
+  padding: 14px 0;
+  background: #ffaf45;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.ss-signup-btn:hover {
+  background: #e69e3d;
+  transform: translateY(-1px);
+}
+
+.ss-signup-error {
+  color: #d11515;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.ss-signup-switch {
+  margin-top: 12px;
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+.ss-signup-link {
+  color: #ffaf45;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  margin-left: 4px;
+  transition: color 0.2s ease-in-out;
+}
+
+.ss-signup-link:hover {
+  color: #e69e3d;
+}
+
+.ss-signup-link:focus {
+  outline: 2px solid #ffaf45;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .ss-signup-root {
+    justify-content: center;
+    padding: 0 2rem;
+  }
+  .ss-signup-form {
+    min-width: 90%;
+    padding: 36px 28px;
+  }
+}
