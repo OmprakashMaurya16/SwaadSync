@@ -1,0 +1,82 @@
+.ss-create-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ss-create-modal {
+  background: var(--ss-card-bg);
+  color: var(--ss-text);
+  border-radius: 18px;
+  padding: 32px 32px 24px 32px;
+  min-width: 350px;
+  max-width: 95vw;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.ss-create-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: var(--ss-text);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.ss-create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ss-create-form input,
+.ss-create-form textarea {
+  background: var(--ss-search-bg);
+  color: var(--ss-text);
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+.ss-create-form input[type="file"] {
+  background: none;
+  color: var(--ss-text);
+  border: none;
+  padding: 0;
+}
+
+.ss-create-form button[type="submit"] {
+  background: #FFAF45;
+  color: #111;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.ss-create-form button[type="submit"]:hover {
+  background: #FFAF45;
+  color: #fff;
+}
+
+.ss-create-error {
+  color: #ff4d4f;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}

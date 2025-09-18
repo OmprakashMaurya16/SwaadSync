@@ -1,6 +1,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import "./Navbar.css";
+import CreateRecipeModal from "../CreateRecipeModal/CreateRecipeModal";
 
 
 // Use SVG icons for black color
@@ -22,6 +23,7 @@ function Navbar() {
   const [isDark, setIsDark] = React.useState(
     typeof window !== 'undefined' && document.body.classList.contains('ss-dark')
   );
+  const [showCreate, setShowCreate] = useState(false);
 
   React.useEffect(() => {
     const handler = () => setIsDark(document.body.classList.contains('ss-dark'));
@@ -31,20 +33,28 @@ function Navbar() {
 
   const iconColor = getIconColor(isDark);
   return (
-    <nav className="ss-navbar">
-      <div className="ss-navbar-logo">
-        {/* Place SwaadSync logo here */}
-      </div>
-      <ul className="ss-navbar-list">
-        {navItems.map((item) => (
-          <li key={item.label} className="ss-navbar-item">
-            <span className="ss-navbar-icon">{item.icon(iconColor)}</span>
-            <span className="ss-navbar-label ss-navbar-label-hover">{item.label}</span>
-          </li>
-        ))}
-      </ul>
-      <SettingsDropdown isDark={isDark} setIsDark={setIsDark} />
-    </nav>
+    <>
+      <nav className="ss-navbar">
+        <div className="ss-navbar-logo">
+          {/* Place SwaadSync logo here */}
+        </div>
+        <ul className="ss-navbar-list">
+          {navItems.map((item) => (
+            <li
+              key={item.label}
+              className="ss-navbar-item"
+              onClick={item.label === "Create" ? () => setShowCreate(true) : undefined}
+              style={item.label === "Create" ? { cursor: "pointer" } : {}}
+            >
+              <span className="ss-navbar-icon">{item.icon(iconColor)}</span>
+              <span className="ss-navbar-label ss-navbar-label-hover">{item.label}</span>
+            </li>
+          ))}
+        </ul>
+        <SettingsDropdown isDark={isDark} setIsDark={setIsDark} />
+      </nav>
+      <CreateRecipeModal open={showCreate} onClose={() => setShowCreate(false)} />
+    </>
   );
 }
 
