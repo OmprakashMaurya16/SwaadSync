@@ -1,7 +1,8 @@
 
-import React from "react";
+import React, { useState } from "react";
 import "./Homepage.css";
 import AccountDropdown from "../../components/AccountDropdown/AccountDropdown";
+import RecipeModalHomepage from "../../components/RecipeModal/RecipeModalHomepage";
 
 const sampleDishes = [
   {
@@ -67,6 +68,34 @@ const sampleDishes = [
 ];
 
 const Homepage = ({ user, onLogout }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalDish, setModalDish] = useState(null);
+  const [liked, setLiked] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [comments, setComments] = useState([]);
+
+  // Save dish to backend (simulate with title for demo)
+  const handleSave = async () => {
+    if (!modalDish?.title) return;
+    try {
+      // Find recipe by title in backend (if real data)
+      // For demo, just set saved true
+      setSaved(true);
+      // If you have recipeId, use:
+      // const token = localStorage.getItem("token");
+      // await fetch("/api/cookbook/add", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      //   body: JSON.stringify({ recipeId }),
+      // });
+    } catch (err) {
+      // Optionally show error
+    }
+  };
+
   return (
     <div className="ss-homepage-root">
       <header className="ss-homepage-header">
@@ -102,7 +131,17 @@ const Homepage = ({ user, onLogout }) => {
       </nav>
       <main className="ss-homepage-masonry">
         {sampleDishes.map((dish) => (
-          <div className="ss-dish-card" key={dish.id}>
+          <div
+            className="ss-dish-card"
+            key={dish.id}
+            onClick={() => {
+              setModalDish(dish);
+              setModalOpen(true);
+              setLiked(false); // Placeholder
+              setSaved(false); // Placeholder
+              setComments([]); // Placeholder
+            }}
+          >
             <img
               src={dish.image}
               alt={dish.title}
@@ -112,6 +151,17 @@ const Homepage = ({ user, onLogout }) => {
             <div className="ss-dish-title">{dish.title}</div>
           </div>
         ))}
+        <RecipeModalHomepage
+          dish={modalDish}
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          onLike={() => setLiked((v) => !v)}
+          onSave={handleSave}
+          onComment={() => {}}
+          liked={liked}
+          saved={saved}
+          comments={comments}
+        />
       </main>
     </div>
   );
