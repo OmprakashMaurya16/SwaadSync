@@ -5,6 +5,7 @@ import Signup from "./pages/Signup/Signup";
 import SavedPost from "./pages/SavedPost/SavedPost";
 import Explore from "./pages/Explore/Explore";
 import Notification from "./pages/Notification/Notification";
+import Post from "./pages/Post/Post";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -17,22 +18,60 @@ function App() {
     setShowSignup(false);
   };
 
-  if (!user) {
-    return showSignup ? (
-      <Signup onSignup={setUser} onShowLogin={() => setShowSignup(false)} />
-    ) : (
-      <Login onLogin={setUser} onShowSignup={() => setShowSignup(true)} />
-    );
-  }
-
   return (
     <Router>
-      <Navbar user={user} />
       <Routes>
-        <Route path="/" element={<Homepage user={user} onLogout={handleLogout} />} />
-        <Route path="/saved" element={<SavedPost />} />
-        <Route path="/explore" element={<Explore />} />
-  <Route path="/notifications" element={<Notification />} />
+        <Route
+          path="/"
+          element={
+            user ? (
+              <>
+                <Navbar user={user} />
+                <Homepage user={user} onLogout={handleLogout} />
+              </>
+            ) : showSignup ? (
+              <Signup onSignup={setUser} onShowLogin={() => setShowSignup(false)} />
+            ) : (
+              <Login onLogin={setUser} onShowSignup={() => setShowSignup(true)} />
+            )
+          }
+        />
+        <Route
+          path="/saved"
+          element={
+            <>
+              <Navbar user={user} />
+              <SavedPost />
+            </>
+          }
+        />
+        <Route
+          path="/explore"
+          element={
+            <>
+              <Navbar user={user} />
+              <Explore />
+            </>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <>
+              <Navbar user={user} />
+              <Notification />
+            </>
+          }
+        />
+        <Route
+          path="/post/:id"
+          element={
+            <>
+              <Navbar user={user} />
+              <Post />
+            </>
+          }
+        />
       </Routes>
     </Router>
   );

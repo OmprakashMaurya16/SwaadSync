@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Explore.css";
 import AccountDropdown from "../../components/AccountDropdown/AccountDropdown";
-import RecipeModal from "../../components/RecipeModal/RecipeModal";
+import { useNavigate } from "react-router-dom";
 
 const cuisines = [
   { name: "Italian", img: "/assets/cuisines/italian.jpg" },
@@ -19,11 +19,7 @@ const Explore = ({ user, onLogout }) => {
   const [selectedCuisine, setSelectedCuisine] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalRecipe, setModalRecipe] = useState(null);
-  const [liked, setLiked] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [comments, setComments] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -48,28 +44,6 @@ const Explore = ({ user, onLogout }) => {
     };
     fetchRecipes();
   }, [selectedCuisine]);
-
-  // Save recipe to backend
-  const handleSave = async () => {
-    if (!modalRecipe?._id) return;
-    try {
-      const token = localStorage.getItem("token");
-      const res = await fetch("/api/cookbook/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ recipeId: modalRecipe._id }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setSaved(true);
-      }
-    } catch (err) {
-      // Optionally show error
-    }
-  };
 
   return (
     <div className="ss-explore-root">
@@ -125,14 +99,8 @@ const Explore = ({ user, onLogout }) => {
               <div
                 className="ss-explore-recipe-card"
                 key={recipe._id}
-                onClick={() => {
-                  setModalRecipe(recipe);
-                  setModalOpen(true);
-                  // Fetch like/saved/comments state from backend here if needed
-                  setLiked(false); // Placeholder
-                  setSaved(false); // Placeholder
-                  setComments(recipe.comments || []);
-                }}
+                onClick={() => navigate(`/post/${recipe._id}`)}
+                style={{ cursor: "pointer" }}
               >
                 {recipe.images && recipe.images[0] && (
                   <img src={recipe.images[0].url} alt={recipe.name} className="ss-explore-recipe-img" />
@@ -142,17 +110,6 @@ const Explore = ({ user, onLogout }) => {
                 <div className="ss-explore-recipe-cuisine">Cuisine: {recipe.cuisine || "Unknown"}</div>
               </div>
             ))}
-      <RecipeModal
-        recipe={modalRecipe}
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onLike={() => setLiked((v) => !v)}
-        onSave={handleSave}
-        onComment={() => {}}
-        liked={liked}
-        saved={saved}
-        comments={comments}
-      />
           </div>
         )}
       </div>
