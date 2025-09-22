@@ -102,15 +102,17 @@ const Homepage = ({ user, onLogout }) => {
       </nav>
       <main className="ss-homepage-masonry">
         {sampleDishes.map((dish) => (
-          <div className="ss-dish-card" key={dish.id}>
-            <img
-              src={dish.image}
-              alt={dish.title}
-              className="ss-dish-img"
-              style={{ height: dish.height, width: "100%", objectFit: "cover" }}
-            />
-            <div className="ss-dish-title">{dish.title}</div>
-          </div>
+          <a href={`/post/${dish.id}`} key={dish.id} style={{ textDecoration: "none", color: "inherit" }}>
+            <div className="ss-dish-card">
+              <img
+                src={dish.image}
+                alt={dish.title}
+                className="ss-dish-img"
+                style={{ height: dish.height, width: "100%", objectFit: "cover" }}
+              />
+              <div className="ss-dish-title">{dish.title}</div>
+            </div>
+          </a>
         ))}
       </main>
     </div>

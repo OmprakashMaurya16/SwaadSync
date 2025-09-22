@@ -1,0 +1,98 @@
+
+.ss-savedpost-root {
+    margin-left: 80px;
+    background: var(--ss-bg);
+    min-height: 100vh;
+    color: var(--ss-text);
+    transition: background 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.ss-savedpost-header {
+    display: flex;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: space-around ;
+    padding: 24px 40px 8px 40px;
+    background: var(--ss-header-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid #eee;
+}
+
+.ss-savedpost-empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #888;
+}
+
+.ss-savedpost-list {
+    column-count: 4;
+    column-gap: 18px;
+    padding: 32px 40px 0 40px;
+}
+
+.ss-savedpost-card {
+    background: var(--ss-card-bg);
+    border-radius: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    overflow: hidden;
+    break-inside: avoid;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+}
+
+/* Improved card UI */
+.ss-savedpost-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: flex-start;
+    padding: 32px 40px 0 40px;
+}
+
+.ss-savedpost-card {
+    background: var(--ss-card-bg);
+    border-radius: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    min-height: 180px;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+    padding: 18px 16px 14px 16px;
+}
+
+.ss-savedpost-card:hover {
+    box-shadow: 0 4px 16px rgba(255,175,69,0.18);
+}
+
+.ss-savedpost-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--ss-text);
+    font-size: 1.08rem;
+    font-weight: 500;
+}
+
+.ss-savedpost-card p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+.ss-savedpost-loading {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: #FFAF45;
+}

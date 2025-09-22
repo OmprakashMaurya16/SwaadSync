@@ -1,0 +1,128 @@
+
+.ss-notification-root {
+	margin-left: 80px;
+	background: var(--ss-bg);
+	min-height: 100vh;
+	color: var(--ss-text);
+	transition: background 0.3s, color 0.3s;
+	display: flex;
+	flex-direction: column;
+}
+
+.ss-notification-header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 24px 40px 8px 40px;
+	background: var(--ss-header-bg);
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	border-bottom: 1px solid #eee;
+}
+.ss-notification-header h1 {
+	font-size: 2.2rem;
+	color: var(--ss-primary);
+	margin-bottom: 0.5rem;
+}
+.ss-notification-sub {
+	color: var(--ss-text-secondary);
+	font-size: 1.1rem;
+}
+
+.ss-notification-suggestions {
+	margin: 2rem auto 1rem auto;
+	max-width: 900px;
+}
+.ss-notification-suggestions h2 {
+	color: var(--ss-primary);
+	font-size: 1.3rem;
+	margin-bottom: 1rem;
+}
+.ss-notification-suggestion-cards {
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.ss-notification-suggestion-card {
+	background: var(--ss-card-bg);
+	border-radius: 18px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+	overflow: hidden;
+	width: 260px;
+	transition: box-shadow 0.2s;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+}
+.ss-notification-suggestion-card:hover {
+	box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.ss-notification-suggestion-card img {
+	width: 100%;
+	height: 140px;
+	object-fit: cover;
+	border-radius: 18px 18px 0 0;
+}
+.ss-notification-suggestion-info {
+	padding: 1rem;
+}
+.ss-notification-suggestion-info h3 {
+	margin: 0 0 0.5rem 0;
+	color: var(--ss-primary);
+	font-size: 1.1rem;
+}
+.ss-notification-suggestion-info p {
+	color: var(--ss-text-secondary);
+	font-size: 1rem;
+}
+
+.ss-notification-list-section {
+	margin: 2rem auto 0 auto;
+	max-width: 700px;
+}
+.ss-notification-list-section h2 {
+	color: var(--ss-primary);
+	font-size: 1.1rem;
+	margin-bottom: 1rem;
+}
+.ss-notification-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.ss-notification-item {
+	background: var(--ss-card-bg);
+	border-radius: 14px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+	margin-bottom: 1rem;
+	padding: 1rem 1.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	transition: box-shadow 0.2s;
+	cursor: pointer;
+}
+.ss-notification-item.save {
+	border-left: 6px solid var(--ss-primary);
+}
+.ss-notification-item.view {
+	border-left: 6px solid #FFAF45;
+}
+.ss-notification-item.suggestion {
+	border-left: 6px solid var(--ss-text-secondary);
+}
+.ss-notification-item:hover {
+	box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+.ss-note-message {
+	color: var(--ss-text);
+	font-size: 1.05rem;
+}
+.ss-note-time {
+	color: var(--ss-text-secondary);
+	font-size: 0.95rem;
+	margin-left: 1.5rem;
+}
