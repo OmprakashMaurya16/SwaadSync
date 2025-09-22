@@ -1,4 +1,5 @@
 const { userModel } = require("../models/userModel");
+const { cookBookModel } = require("../models/cookBookModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
@@ -52,8 +53,14 @@ const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
     });
-    const token = createToken(user._id);
 
+    await cookBookModel.create({
+      owner: user._id,
+      title: "My Cookbook",
+      recipes: [],
+    });
+
+    const token = createToken(user._id);
     res.status(201).json({ success: true, token });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

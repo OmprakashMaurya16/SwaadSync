@@ -12,7 +12,7 @@ const authMiddleware = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.id; // safer than using req.body.userId
+    req.userId = decoded.id;
     next();
   } catch (error) {
     return res

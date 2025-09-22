@@ -3,13 +3,13 @@ const {
   addToCookBook,
   removeFromCookBook,
   getAllRecipe,
-} = require("../controller/cookBookController");
-const { authMiddleware } = require("../middleware/auth");
+} = require("../controllers/cookBookController");
+const { authMiddleware } = require("../middleware/authMiddleware");
 
-const cookBookRouter = express.Router();
+const router = express.Router();
 
-cookBookRouter.post("/add", authMiddleware, addToCookBook);
-cookBookRouter.get("/get", authMiddleware, getAllRecipe);
-cookBookRouter.delete("/:id/remove", authMiddleware, removeFromCookBook);
+router.get("/", authMiddleware, getAllRecipe);
+router.post("/", authMiddleware, addToCookBook);
+router.delete("/:id", authMiddleware, removeFromCookBook);
 
-module.exports = { cookBookRouter };
+module.exports = { cookBookRouter: router };

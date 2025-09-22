@@ -1,28 +1,23 @@
 const express = require("express");
-const multer = require("multer");
-const { storage } = require("../config/cloudConfig");
 const {
   addRecipe,
   listRecipe,
   removeRecipe,
-} = require("../controller/recipeController");
-const { authMiddleware } = require("../middleware/auth");
+} = require("../controllers/recipeController");
+const { authMiddleware } = require("../middleware/authMiddleware");
+const { storage } = require("../middleware/multer");
+const multer = require("multer");
 
-const recipeRouter = express.Router();
 const upload = multer({ storage });
+const router = express.Router();
 
-recipeRouter.post(
-  "/add",
+router.get("/", listRecipe);
+router.post(
+  "/",
   authMiddleware,
-  upload.fields([
-    { name: "image", maxCount: 3 },
-    { name: "video", maxCount: 1 },
-  ]),
+  upload.fields([{ name: "image" }, { name: "video" }]),
   addRecipe
 );
+router.delete("/:id", authMiddleware, removeRecipe);
 
-recipeRouter.get("/list", authMiddleware, listRecipe);
-
-recipeRouter.delete("/:id/remove", authMiddleware, removeRecipe);
-
-module.exports = { recipeRouter };
+module.exports = { recipeRouter: router };

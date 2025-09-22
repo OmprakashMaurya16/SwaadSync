@@ -3,6 +3,7 @@ const { cookBookModel } = require("../models/cookBookModel");
 const addToCookBook = async (req, res) => {
   const { recipeId, title } = req.body;
   const userId = req.userId;
+
   try {
     let cookBook = await cookBookModel.findOne({ owner: userId });
 
@@ -34,14 +35,13 @@ const addToCookBook = async (req, res) => {
 const removeFromCookBook = async (req, res) => {
   const userId = req.userId;
   const recipeId = req.params.id;
+
   try {
     const cookBook = await cookBookModel.findOne({ owner: userId });
-
-    if (!cookBook) {
+    if (!cookBook)
       return res
         .status(404)
         .json({ success: false, message: "Cookbook not found" });
-    }
 
     cookBook.recipes = cookBook.recipes.filter(
       (id) => id.toString() !== recipeId
@@ -64,11 +64,11 @@ const getAllRecipe = async (req, res) => {
     const cookBook = await cookBookModel
       .findOne({ owner: userId })
       .populate("recipes");
-    if (!cookBook) {
+    if (!cookBook)
       return res
         .status(404)
         .json({ success: false, message: "Cookbook not found" });
-    }
+
     res.status(200).json({ success: true, recipes: cookBook.recipes });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
