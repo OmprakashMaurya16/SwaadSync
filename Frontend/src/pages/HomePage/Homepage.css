@@ -83,6 +83,7 @@ body.ss-dark .ss-chef-hat-img {
 }
 
 .ss-homepage-searchbar {
+	position: relative;
 	display: flex;
 	align-items: center;
 	background: var(--ss-search-bg);
@@ -96,9 +97,12 @@ body.ss-dark .ss-chef-hat-img {
 }
 
 .ss-search-icon {
-	font-size: 1.3rem;
+	position: absolute;
+	left: 16px;
+	top: 50%;
+	transform: translateY(-50%);
 	color: #888;
-	margin-right: 8px;
+	z-index: 1;
 }
 
 .ss-search-input {
@@ -107,7 +111,7 @@ body.ss-dark .ss-chef-hat-img {
 	outline: none;
 	font-size: 1.1rem;
 	width: 100%;
-	padding: 12px 0;
+	padding: 12px 12px 12px 48px;
 	color: var(--ss-text);
 }
 

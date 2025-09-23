@@ -49,20 +49,19 @@ function Navbar({ onNav, page }) {
                 className={
                   "ss-navbar-item" + (isActive ? " ss-navbar-item-active" : "")
                 }
-                onClick={
-                  item.label === "Create"
-                    ? () => setShowCreate(true)
-                    : item.label === "Cookbooks"
-                    ? () => onNav && onNav("cookbooks")
-                    : item.label === "Explore"
-                    ? () => onNav && onNav("home")
-                    : undefined
-                }
-                style={
-                  item.label === "Create" || item.label === "Cookbooks" || item.label === "Explore"
-                    ? { cursor: "pointer" }
-                    : {}
-                }
+                onClick={() => {
+                  if (item.label === "Create") {
+                    setShowCreate(true);
+                  } else if (item.label === "Cookbooks") {
+                    onNav && onNav("cookbooks");
+                  } else if (item.label === "Explore") {
+                    onNav && onNav("home");
+                  }
+                  // Add other nav items here as needed
+                }}
+                style={{
+                  cursor: "pointer"
+                }}
               >
                 <span className="ss-navbar-icon">{item.icon(iconColor)}</span>
                 <span className="ss-navbar-label ss-navbar-label-hover">{item.label}</span>

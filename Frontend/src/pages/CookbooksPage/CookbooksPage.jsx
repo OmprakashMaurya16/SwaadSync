@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./CookbooksPage.css";
+import CreateRecipeModal from "../../components/CreateRecipeModal/CreateRecipeModal";
 
 // Dummy cookbook data
 const dummyCookbooks = [
@@ -74,15 +75,27 @@ const dummyCookbooks = [
   }
 ];
 
-export default function CookbooksPage() {
-  const [activeTab, setActiveTab] = useState("Pins");
-  const [viewMode, setViewMode] = useState("all"); // all, group, archived
+export default function CookbooksPage({ onPostClick }) {
+  const [activeTab, setActiveTab] = useState("Recipes");
+  const [showCreate, setShowCreate] = useState(false);
+
+  const handleCookbookClick = (cookbook) => {
+    // For now, simulate opening the first recipe from the cookbook
+    const fakePost = {
+      id: cookbook.id,
+      title: cookbook.title,
+      image: cookbook.images[0],
+      description: `A collection of ${cookbook.pinCount} amazing ${cookbook.title.toLowerCase()} recipes`,
+      category: cookbook.title
+    };
+    onPostClick && onPostClick(fakePost);
+  };
 
   return (
     <div className="ss-cookbooks-root">
       <div className="ss-cookbooks-header">
         <div className="ss-cookbooks-left">
-          <h1>Your saved ideas</h1>
+          <h1>My Cookbooks</h1>
         </div>
         <div className="ss-cookbooks-right">
           <div className="ss-user-info">
@@ -102,22 +115,10 @@ export default function CookbooksPage() {
 
       <div className="ss-cookbooks-tabs">
         <span 
-          className={`ss-cookbooks-tab ${activeTab === "Pins" ? "ss-cookbooks-tab-active" : ""}`}
-          onClick={() => setActiveTab("Pins")}
+          className={`ss-cookbooks-tab ${activeTab === "Recipes" ? "ss-cookbooks-tab-active" : ""}`}
+          onClick={() => setActiveTab("Recipes")}
         >
-          Pins
-        </span>
-        <span 
-          className={`ss-cookbooks-tab ${activeTab === "Boards" ? "ss-cookbooks-tab-active" : ""}`}
-          onClick={() => setActiveTab("Boards")}
-        >
-          Boards
-        </span>
-        <span 
-          className={`ss-cookbooks-tab ${activeTab === "Collages" ? "ss-cookbooks-tab-active" : ""}`}
-          onClick={() => setActiveTab("Collages")}
-        >
-          Collages
+          Recipes
         </span>
       </div>
 
@@ -135,26 +136,23 @@ export default function CookbooksPage() {
             <line x1="17" y1="16" x2="23" y2="16"></line>
           </svg>
         </div>
-        <span 
-          className={`ss-filter-btn ${viewMode === "all" ? "ss-filter-active" : ""}`}
-          onClick={() => setViewMode("all")}
-        >
-          Group
-        </span>
-        <span 
-          className={`ss-filter-btn ${viewMode === "archived" ? "ss-filter-active" : ""}`}
-          onClick={() => setViewMode("archived")}
-        >
-          Archived
-        </span>
         <div className="ss-cookbooks-actions-right">
-          <button className="ss-create-btn">Create</button>
+          <button 
+            className="ss-create-btn"
+            onClick={() => setShowCreate(true)}
+          >
+            Create
+          </button>
         </div>
       </div>
 
       <div className="ss-cookbooks-grid">
         {dummyCookbooks.map((cookbook) => (
-          <div className="ss-cookbook-board" key={cookbook.id}>
+          <div 
+            className="ss-cookbook-board" 
+            key={cookbook.id}
+            onClick={() => handleCookbookClick(cookbook)}
+          >
             <div className="ss-cookbook-images">
               {cookbook.images.slice(0, 4).map((image, index) => (
                 <img
@@ -167,11 +165,13 @@ export default function CookbooksPage() {
             </div>
             <div className="ss-cookbook-info">
               <h3 className="ss-cookbook-title">{cookbook.title}</h3>
-              <p className="ss-cookbook-meta">{cookbook.pinCount} Pins • {cookbook.timeAgo}</p>
+              <p className="ss-cookbook-meta">{cookbook.pinCount} Recipes • {cookbook.timeAgo}</p>
             </div>
           </div>
         ))}
       </div>
+
+      <CreateRecipeModal open={showCreate} onClose={() => setShowCreate(false)} />
     </div>
   );
 }
