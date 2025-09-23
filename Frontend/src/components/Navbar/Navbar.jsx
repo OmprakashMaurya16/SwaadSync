@@ -19,7 +19,7 @@ const navItems = [
 
 
 
-function Navbar() {
+function Navbar({ onNav, page }) {
   const [isDark, setIsDark] = React.useState(
     typeof window !== 'undefined' && document.body.classList.contains('ss-dark')
   );
@@ -39,17 +39,36 @@ function Navbar() {
           {/* Place SwaadSync logo here */}
         </div>
         <ul className="ss-navbar-list">
-          {navItems.map((item) => (
-            <li
-              key={item.label}
-              className="ss-navbar-item"
-              onClick={item.label === "Create" ? () => setShowCreate(true) : undefined}
-              style={item.label === "Create" ? { cursor: "pointer" } : {}}
-            >
-              <span className="ss-navbar-icon">{item.icon(iconColor)}</span>
-              <span className="ss-navbar-label ss-navbar-label-hover">{item.label}</span>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            let isActive = false;
+            if (item.label === "Explore" && page === "home") isActive = true;
+            if (item.label === "Cookbooks" && page === "cookbooks") isActive = true;
+            return (
+              <li
+                key={item.label}
+                className={
+                  "ss-navbar-item" + (isActive ? " ss-navbar-item-active" : "")
+                }
+                onClick={
+                  item.label === "Create"
+                    ? () => setShowCreate(true)
+                    : item.label === "Cookbooks"
+                    ? () => onNav && onNav("cookbooks")
+                    : item.label === "Explore"
+                    ? () => onNav && onNav("home")
+                    : undefined
+                }
+                style={
+                  item.label === "Create" || item.label === "Cookbooks" || item.label === "Explore"
+                    ? { cursor: "pointer" }
+                    : {}
+                }
+              >
+                <span className="ss-navbar-icon">{item.icon(iconColor)}</span>
+                <span className="ss-navbar-label ss-navbar-label-hover">{item.label}</span>
+              </li>
+            );
+          })}
         </ul>
         <SettingsDropdown isDark={isDark} setIsDark={setIsDark} />
       </nav>

@@ -1,3 +1,9 @@
+/* Highlight active nav item */
+.ss-navbar-item-active {
+	background: #FFAF45;
+	color: #111;
+	border-radius: 12px;
+}
 
 .ss-navbar {
 	position: fixed;

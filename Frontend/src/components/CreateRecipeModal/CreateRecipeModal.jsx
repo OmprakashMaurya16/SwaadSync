@@ -41,17 +41,50 @@ export default function CreateRecipeModal({ open, onClose, onSuccess }) {
       data.append("ingredients", JSON.stringify(form.ingredients.split(",").map(i => ({ name: i.trim(), quantity: 1, unit: "" }))));
       images.forEach((img) => data.append("image", img));
       if (video) data.append("video", video);
-      const res = await fetch("/api/recipe/add", {
+      
+      const res = await fetch("http://localhost:8080/api/recipe/add", {
         method: "POST",
         headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` },
         body: data,
       });
+      
+      // Check if response is ok
+      if (!res.ok) {
+        throw new Error(`Server error: ${res.status} ${res.statusText}`);
+      }
+      
+      // Check if response is JSON
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Server returned non-JSON response");
+      }
+      
       const result = await res.json();
       if (!result.success) throw new Error(result.message || "Failed to create recipe");
+      
+      // Reset form on success
+      setForm({
+        name: "",
+        description: "",
+        category: "",
+        instructions: "",
+        ingredients: "",
+        tags: "",
+      });
+      setImages([]);
+      setVideo(null);
+      
       onSuccess && onSuccess(result.recipe);
       onClose();
     } catch (err) {
-      setError(err.message);
+      console.error("Recipe creation error:", err);
+      if (err.message.includes("fetch")) {
+        setError("Cannot connect to server. Please make sure the backend is running.");
+      } else if (err.message.includes("JSON")) {
+        setError("Server response error. Please try again.");
+      } else {
+        setError(err.message);
+      }
     } finally {
       setLoading(false);
     }
