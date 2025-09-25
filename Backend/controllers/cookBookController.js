@@ -2,24 +2,27 @@ const { cookBookModel } = require("../models/cookBookModel");
 
 const addToCookBook = async (req, res) => {
   const { recipeId, title } = req.body;
-  const userId = req.userId;
+
+  if (!recipeId)
+    return res
+      .status(400)
+      .json({ success: false, message: "Recipe ID is required" });
 
   try {
-    let cookBook = await cookBookModel.findOne({ owner: userId });
+    let cookBook = await cookBookModel.findOne({ owner: req.userId });
 
     if (!cookBook) {
       cookBook = new cookBookModel({
-        owner: userId,
+        owner: req.userId,
         title: title || "My Cookbook",
         recipes: [],
       });
     }
 
-    if (cookBook.recipes.includes(recipeId)) {
+    if (cookBook.recipes.includes(recipeId))
       return res
         .status(400)
-        .json({ success: false, message: "Recipe already in cookbook" });
-    }
+        .json({ success: false, message: "Recipe already exists in cookbook" });
 
     cookBook.recipes.push(recipeId);
     await cookBook.save();
@@ -33,11 +36,15 @@ const addToCookBook = async (req, res) => {
 };
 
 const removeFromCookBook = async (req, res) => {
-  const userId = req.userId;
   const recipeId = req.params.id;
 
+  if (!recipeId)
+    return res
+      .status(400)
+      .json({ success: false, message: "Recipe ID is required" });
+
   try {
-    const cookBook = await cookBookModel.findOne({ owner: userId });
+    const cookBook = await cookBookModel.findOne({ owner: req.userId });
     if (!cookBook)
       return res
         .status(404)
@@ -59,10 +66,9 @@ const removeFromCookBook = async (req, res) => {
 };
 
 const getAllRecipe = async (req, res) => {
-  const userId = req.userId;
   try {
     const cookBook = await cookBookModel
-      .findOne({ owner: userId })
+      .findOne({ owner: req.userId })
       .populate("recipes");
     if (!cookBook)
       return res

@@ -10,7 +10,7 @@
 }
 
 .ss-signup-form {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 48px 56px;
   display: flex;
@@ -20,12 +20,12 @@
   max-width: 400px;
   align-items: stretch;
   backdrop-filter: blur(8px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .ss-signup-title {
   color: #fff;
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: 700;
   margin-bottom: 16px;
   text-align: center;
@@ -35,7 +35,7 @@
   width: 100%;
   padding: 14px 18px;
   border-radius: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
@@ -72,9 +72,8 @@
 }
 
 .ss-signup-error {
-  color: #d11515;
+  color: #ff4d4d;
   font-size: 0.95rem;
-  margin-bottom: 4px;
   text-align: center;
 }
 
@@ -108,6 +107,7 @@
     justify-content: center;
     padding: 0 2rem;
   }
+
   .ss-signup-form {
     min-width: 90%;
     padding: 36px 28px;

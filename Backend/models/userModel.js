@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
   {
@@ -14,11 +13,13 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
       trim: true,
+      lowercase: true,
     },
 
     password: {
       type: String,
       required: true,
+      minlength: 8,
     },
 
     badges: {
@@ -43,20 +44,11 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
-
 userSchema.pre("findOneAndDelete", async function (next) {
   const doc = await this.model.findOne(this.getFilter());
-  if (doc) {
-    await mongoose.model("Review").deleteMany({ author: doc._id });
-  }
+  if (doc) await mongoose.model("Review").deleteMany({ author: doc._id });
   next();
 });
 
 const userModel = mongoose.model("User", userSchema);
-
 module.exports = { userModel };

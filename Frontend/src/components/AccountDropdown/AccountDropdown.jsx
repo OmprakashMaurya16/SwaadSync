@@ -28,6 +28,7 @@ export default function AccountDropdown({ user, onLogout }) {
           src={user?.avatar || "https://randomuser.me/api/portraits/men/32.jpg"}
           alt="Profile"
           className="ss-profile-img"
+          height="50px"
         />
       </div>
       {open && (

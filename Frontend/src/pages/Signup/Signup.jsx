@@ -35,8 +35,8 @@ export default function Signup({ onSignup, onShowLogin }) {
         "http://localhost:8080/api/users/register",
         {
           name: fullname,
-          email: email,
-          password: password,
+          email,
+          password,
         }
       );
       setLoading(false);
@@ -52,13 +52,7 @@ export default function Signup({ onSignup, onShowLogin }) {
       }
     } catch (err) {
       setLoading(false);
-      if (err.response?.data?.message) {
-        setError(err.response.data.message);
-      } else if (err.message) {
-        setError("Server error. Please try again later.");
-      } else {
-        setError("An unexpected error occurred.");
-      }
+      setError(err.response?.data?.message || "Server error. Try again later.");
     }
   };
 
@@ -99,13 +93,8 @@ export default function Signup({ onSignup, onShowLogin }) {
           {loading ? "Signing Up..." : "Sign Up"}
         </button>
         <div className="ss-signup-switch">
-          Already have an account?{" "}
-          <span
-            className="ss-signup-link"
-            onClick={onShowLogin}
-            tabIndex={0}
-            role="button"
-          >
+          Already have an account?
+          <span className="ss-signup-link" onClick={onShowLogin} tabIndex={0}>
             Login
           </span>
         </div>

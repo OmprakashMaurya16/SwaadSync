@@ -16,10 +16,19 @@ const Post = () => {
     if (id === "1") {
       setRecipe({
         title: "Classic Margherita Pizza",
-        imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
+        imageUrl:
+          "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
         cook: "Chef Mario",
-        ingredients: ["Pizza dough", "Tomato sauce", "Mozzarella cheese", "Fresh basil", "Olive oil", "Salt"],
-        instructions: "Spread tomato sauce on dough, add mozzarella, bake at 220°C for 12 min, top with basil and olive oil.",
+        ingredients: [
+          "Pizza dough",
+          "Tomato sauce",
+          "Mozzarella cheese",
+          "Fresh basil",
+          "Olive oil",
+          "Salt",
+        ],
+        instructions:
+          "Spread tomato sauce on dough, add mozzarella, bake at 220°C for 12 min, top with basil and olive oil.",
       });
       setComments([
         { user: "Foodie123", text: "This pizza looks amazing!" },
@@ -107,12 +116,22 @@ const Post = () => {
         </header>
         <div className="post-main">
           <div className="post-image-section">
-            <img src={recipe.imageUrl} alt={recipe.title} className="post-image" />
+            <img
+              src={recipe.imageUrl}
+              alt={recipe.title}
+              className="post-image"
+            />
             <div className="post-actions">
-              <button className={`like-btn${liked ? " liked" : ""}`} onClick={handleLike}>
+              <button
+                className={`like-btn${liked ? " liked" : ""}`}
+                onClick={handleLike}
+              >
                 {liked ? "♥ Liked" : "♡ Like"}
               </button>
-              <button className={`save-btn${saved ? " saved" : ""}`} onClick={handleSave}>
+              <button
+                className={`save-btn${saved ? " saved" : ""}`}
+                onClick={handleSave}
+              >
                 {saved ? "★ Saved" : "☆ Save"}
               </button>
             </div>
@@ -138,7 +157,9 @@ const Post = () => {
             </div>
           </div>
           <div className="post-details">
-            <div className="post-cook">By <span>{recipe.cook}</span></div>
+            <div className="post-cook">
+              By <span>{recipe.cook}</span>
+            </div>
             <div className="post-section">
               <h2>Ingredients</h2>
               <div className="line"></div>

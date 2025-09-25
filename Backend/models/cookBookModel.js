@@ -8,10 +8,19 @@ const cookBookSchema = new mongoose.Schema(
       required: true,
     },
 
-    title: { type: String, required: true, trim: true },
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
     recipes: {
-      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Recipe",
+        },
+      ],
       default: [],
     },
   },

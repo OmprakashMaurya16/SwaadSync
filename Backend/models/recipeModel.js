@@ -14,11 +14,18 @@ const recipeSchema = new mongoose.Schema(
       trim: true,
     },
 
-    description: { type: String, required: true, trim: true },
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
     ingredients: [
       {
-        name: { type: String, required: true },
+        name: {
+          type: String,
+          required: true,
+        },
         quantity: {
           type: Number,
           required: true,
@@ -35,24 +42,39 @@ const recipeSchema = new mongoose.Schema(
       required: true,
     },
 
-    images: { type: [{ url: String, filename: String }], default: [] },
+    images: {
+      type: [{ url: String, filename: String }],
+      default: [],
+    },
 
-    videoUrl: { type: String, default: "" },
+    videoUrl: {
+      type: String,
+      default: "",
+    },
 
-    filters: { type: [String], default: [] },
+    filters: {
+      type: [String],
+      default: [],
+    },
 
-    tags: { type: [String], default: [] },
+    tags: {
+      type: [String],
+      default: [],
+    },
 
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
+    reviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   { timestamps: true }
 );
 
 recipeSchema.pre("findOneAndDelete", async function (next) {
   const doc = await this.model.findOne(this.getFilter());
-  if (doc) {
-    await mongoose.model("Review").deleteMany({ recipe: doc._id });
-  }
+  if (doc) await mongoose.model("Review").deleteMany({ recipe: doc._id });
   next();
 });
 

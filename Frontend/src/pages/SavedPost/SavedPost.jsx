@@ -1,55 +1,37 @@
 import React, { useEffect, useState } from "react";
 import "./SavedPost.css";
 import AccountDropdown from "../../components/AccountDropdown/AccountDropdown";
+import { cookbookAPI, recipeAPI } from "../../utils/api"; 
 
-const SavedPost = ({ user, onLogout }) => {
-  const [recipes, setRecipes] = useState([]);
+const SavedPost = ({ user, onLogout, onPostClick }) => {
+  const [savedRecipes, setSavedRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const fetchSavedRecipes = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await fetch("/user/saved", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await res.json();
-        if (data.success && data.recipes.length > 0) {
-          setRecipes(data.recipes);
-        } else {
-          setRecipes([
-            {
-              _id: "1",
-              name: "Classic Margherita Pizza",
-              description: "A timeless Italian pizza with fresh basil and mozzarella.",
-            },
-          ]);
-        }
-      } catch (err) {
-        setRecipes([
-          {
-            _id: "1",
-            name: "Classic Margherita Pizza",
-            description: "A timeless Italian pizza with fresh basil and mozzarella.",
-          },
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchSavedRecipes();
   }, []);
 
-  const filteredRecipes = recipes.filter(
-    (recipe) =>
-      recipe.name.toLowerCase().includes(search.toLowerCase()) ||
-      recipe.description.toLowerCase().includes(search.toLowerCase())
+  const fetchSavedRecipes = async () => {
+    try {
+      const response = await cookbookAPI.getRecipes(); 
+      if (response.data.success) {
+        setSavedRecipes(response.data.recipes || []);
+      }
+    } catch (error) {
+      console.error("Error fetching saved recipes:", error);
+      setSavedRecipes([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filteredRecipes = savedRecipes.filter(recipe =>
+    recipe.name?.toLowerCase().includes(search.toLowerCase()) ||
+    recipe.description?.toLowerCase().includes(search.toLowerCase())
   );
 
-  if (loading) return <div className="ss-savedpost-loading">Loading...</div>;
+  if (loading) return <div className="ss-loading">Loading saved recipes...</div>;
 
   return (
     <div className="ss-savedpost-root">
@@ -57,39 +39,55 @@ const SavedPost = ({ user, onLogout }) => {
         <div className="ss-homepage-searchbar">
           <span className="ss-search-icon">🔍</span>
           <input
-            className="ss-search-input"
             type="text"
-            placeholder="Search your saved post..."
+            placeholder="Search saved recipes..."
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
         <div className="ss-homepage-header-right">
-          <div className="ss-streak">
-            <span className="ss-chef-hat">
-              <img src="/assets/chef-hat.png" alt="Streaks" className="ss-chef-hat-img" />
-              <span className="ss-streak-tooltip">Streaks</span>
-            </span>
-            <span className="ss-streak-count ss-streak-count-right">0</span>
-          </div>
           <AccountDropdown user={user} onLogout={onLogout} />
         </div>
       </header>
+
       <div className="ss-savedpost-header">
-        <h2>Saved Recipes</h2>
+        <h2>Saved Recipes ({savedRecipes.length})</h2>
+        <p>Your personal collection of favorite recipes</p>
       </div>
-      {filteredRecipes.length === 0 ? (
-        <div className="ss-savedpost-empty">No saved recipes found.</div>
+
+      {savedRecipes.length === 0 ? (
+        <div className="ss-empty-saved">
+          <div style={{ textAlign: 'center', padding: '60px 20px' }}>
+            <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📚</div>
+            <h3>No saved recipes yet</h3>
+            <p style={{ opacity: 0.7, marginBottom: '2rem' }}>
+              Start saving your favorite recipes to see them here!
+            </p>
+          </div>
+        </div>
       ) : (
-        <div className="ss-savedpost-list">
-          {filteredRecipes.map((recipe) => (
-            <a href={`/post/${recipe._id}`} key={recipe._id} style={{ textDecoration: "none", color: "inherit" }}>
-              <div className="ss-savedpost-card">
+        <div className="ss-savedpost-grid">
+          {filteredRecipes.map(recipe => (
+            <div
+              key={recipe._id}
+              className="ss-savedpost-card"
+              onClick={() => onPostClick(recipe)}
+            >
+              <img 
+                src={recipe.images?.[0]?.url || "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=80"} 
+                alt={recipe.name}
+                onError={(e) => {
+                  e.target.src = "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=80";
+                }}
+              />
+              <div className="ss-savedpost-card-content">
                 <h3>{recipe.name}</h3>
                 <p>{recipe.description}</p>
-                {/* Add more recipe details as needed */}
+                <div className="ss-savedpost-card-meta">
+                  <span>By {recipe.owner?.name || "Unknown Chef"}</span>
+                </div>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       )}
