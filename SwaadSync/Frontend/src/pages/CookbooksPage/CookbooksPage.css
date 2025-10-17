@@ -1,0 +1,250 @@
+.ss-cookbooks-root {
+  margin-left: 80px;
+  min-height: 100vh;
+  background: var(--ss-bg);
+  color: var(--ss-text);
+  transition: background 0.3s, color 0.3s;
+  padding: 32px 40px;
+}
+
+.ss-cookbooks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.ss-cookbooks-left h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ss-text);
+}
+
+.ss-cookbooks-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ss-user-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ss-user-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ss-user-details h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--ss-text);
+}
+
+.ss-user-details p {
+  margin: 4px 0 0 0;
+  font-size: 0.95rem;
+  color: var(--ss-text);
+  opacity: 0.7;
+}
+
+.ss-view-profile-btn {
+  background: #FFAF45;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #111;
+  transition: background 0.2s;
+}
+
+.ss-view-profile-btn:hover {
+  background: #e69a3a;
+}
+
+.ss-cookbooks-tabs {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e9e9e9;
+  padding-bottom: 16px;
+}
+
+.ss-cookbooks-tab {
+  font-size: 1.1rem;
+  color: var(--ss-text);
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background 0.15s, color 0.15s;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.ss-cookbooks-tab-active {
+  background: #FFAF45;
+  color: #111;
+  opacity: 1;
+  font-weight: 600;
+}
+
+.ss-cookbooks-tab:hover:not(.ss-cookbooks-tab-active) {
+  background: #f0f0f0;
+  opacity: 1;
+}
+
+.ss-cookbooks-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.ss-filter-icon {
+  color: var(--ss-text);
+  opacity: 0.7;
+}
+
+.ss-filter-btn {
+  background: #f0f0f0;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #111;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+}
+
+.ss-filter-btn:hover,
+.ss-filter-active {
+  background: #e0e0e0;
+}
+
+.ss-cookbooks-actions-right {
+  margin-left: auto;
+}
+
+.ss-create-btn {
+  background: #FFAF45;
+  border: none;
+  color: #111;
+  padding: 12px 20px;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ss-create-btn:hover {
+  background: #e69a3a;
+}
+
+.ss-cookbooks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.ss-cookbook-board {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.ss-cookbook-board:hover {
+  transform: scale(1.02);
+}
+
+.ss-cookbook-images {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas: 
+    "img1 img2"
+    "img3 img4";
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.ss-cookbook-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ss-cookbook-image-1 {
+  grid-area: img1;
+}
+
+.ss-cookbook-image-2 {
+  grid-area: img2;
+}
+
+.ss-cookbook-image-3 {
+  grid-area: img3;
+}
+
+.ss-cookbook-image-4 {
+  grid-area: img4;
+}
+
+.ss-cookbook-info {
+  text-align: left;
+}
+
+.ss-cookbook-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ss-text);
+  margin: 0 0 4px 0;
+}
+
+.ss-cookbook-meta {
+  font-size: 0.9rem;
+  color: var(--ss-text);
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* Dark mode adjustments */
+.ss-dark .ss-view-profile-btn {
+  background: #FFAF45;
+  color: #111;
+}
+
+.ss-dark .ss-view-profile-btn:hover {
+  background: #e69a3a;
+}
+
+.ss-dark .ss-cookbooks-tab-active {
+  background: #FFAF45;
+  color: #111;
+}
+
+.ss-dark .ss-filter-btn {
+  background: #333;
+  color: #fff;
+}
+
+.ss-dark .ss-filter-btn:hover,
+.ss-dark .ss-filter-active {
+  background: #444;
+}
+
+.ss-dark .ss-cookbooks-tabs {
+  border-bottom-color: #333;
+}
